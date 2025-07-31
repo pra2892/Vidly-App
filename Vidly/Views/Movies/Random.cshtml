@@ -11,6 +11,7 @@
     <thead>
         <tr>
             <th>Movies</th>
+            <th>Genre</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +19,8 @@
             foreach (Movie movie in Model)
             {
                 <tr>
-                   <td><a href="~/movies/details/@movie.Id">@movie.Name</a></td>
+                    <td><a href="~/movies/details/@movie.Id">@movie.Name</a></td>
+                    <td>@movie.Genre.Name</td>
                 </tr>
             }
         }

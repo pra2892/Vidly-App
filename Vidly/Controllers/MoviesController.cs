@@ -14,26 +14,15 @@ namespace Vidly.Controllers
         [Route("movies")]
         public ActionResult Random()
         {
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie() { Id = 1, Name = "Pushpa"},
-                new Movie() { Id = 2, Name = "KGF"}
-            };
-
+            var movies = getMovieList();
             return View(movies);
         }
 
         [Route("movies/details/{Id}")]
         public ActionResult Details(int Id)
         {
-            List<Movie> movies = new List<Movie>
-            {
-                new Movie() { Id = 1, Name = "Pushpa"},
-                new Movie() { Id = 2, Name = "KGF"}
-            };
-
-            List<Movie> movie = movies.Where(item => item.Id == Id).ToList();
-
+            var movie = getMovieList().SingleOrDefault(item => item.Id == Id);
+            if (movie == null) { return HttpNotFound(); }
             return View(movie);
         }
 
@@ -41,6 +30,14 @@ namespace Vidly.Controllers
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year +"/"+ month);
+        }
+
+        private IEnumerable<Movie> getMovieList() {
+            return new List<Movie>
+            {
+                new Movie { Id = 1, Name = "Pushpa" },
+                new Movie { Id = 2, Name = "KGF" }
+            };
         }
 
     }

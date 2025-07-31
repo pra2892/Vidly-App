@@ -3,21 +3,8 @@
 
 @{
     ViewBag.Title = "Details";
+    var movie = Model.ToList();
 }
 
-@{
-    if (Model.Any())
-    {
-        var movie = Model.ToList();
-        <h2>@movie[0].Name</h2>
-    }
-    else
-    {
-        <h2>Movie Not Found</h2>
-    }
-}
-
-
-
-
+<h2>@movie[0].Name</h2>
 

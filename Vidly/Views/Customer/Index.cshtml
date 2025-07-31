@@ -10,6 +10,9 @@
     <thead>
         <tr>
             <th>Customers</th>
+            <th>Discount Rate</th>
+            <th>Duration (Months)</th>
+            <th>Signup Fee</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +23,9 @@
                     <td>
                         <a href="~/customers/details/@customer.Id">@customer.Name</a>
                     </td>
+                    <td>@customer.MembershipType.DiscountRate %</td>
+                    <td>@customer.MembershipType.DurationInMonths</td>
+                    <td>$@customer.MembershipType.SignUpFee</td>
                 </tr>
             }
         }

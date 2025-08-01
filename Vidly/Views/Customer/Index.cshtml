@@ -13,6 +13,7 @@
             <th>Discount Rate</th>
             <th>Duration (Months)</th>
             <th>Signup Fee</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
                     <td>@customer.MembershipType.DiscountRate %</td>
                     <td>@customer.MembershipType.Name</td>
                     <td>$@customer.MembershipType.SignUpFee</td>
+                    <td><a href="~/customers/edit/@customer.Id">Edit</a></td>
                 </tr>
             }
         }

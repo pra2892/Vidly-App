@@ -37,10 +37,55 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
-        [Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
-        public ActionResult ByReleaseDate(int year, int month)
-        {
-            return Content(year +"/"+ month);
+        [Route("movies/new")]
+        public ActionResult New() {
+
+            ViewBag.pageTitle = "New Movie";
+
+            var genres = _context.Genres.ToList();
+
+            var viewModel = new MovieWithGenre { 
+                Genres = genres
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Movie movie) {
+            if (movie.Id == 0) {
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var MovieInDB = _context.Movies.Single(m => m.Id == movie.Id);
+                MovieInDB.Name = movie.Name;
+                MovieInDB.ReleaseDate = movie.ReleaseDate;
+                MovieInDB.NumberInStock = movie.NumberInStock;
+                MovieInDB.GenreId = movie.GenreId;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Random", "Movies");
+        }
+
+        [Route("movies/edit/{Id}")]
+        public ActionResult Edit(int Id) {
+            ViewBag.pageTitle = "Edit Movie";
+
+            var movies = _context.Movies.SingleOrDefault(m => m.Id == Id);
+            if (movies == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new MovieWithGenre
+            {
+                movie = movies,
+                Genres = _context.Genres.ToList()
+            };
+            return View("MovieForm", viewModel);
         }
     }
 }

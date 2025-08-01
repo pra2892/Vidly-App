@@ -42,8 +42,9 @@ namespace Vidly.Controllers
         }
 
         [Route("customers/new")]
-        public ActionResult New() 
+        public ActionResult New()
         {
+            ViewBag.pageTitle = "New Customer";
             var membershipTypes = _context.MembershipTypes.ToList();
 
             var viewModel = new CustomerWithMembershipType
@@ -72,13 +73,14 @@ namespace Vidly.Controllers
             }
 
             _context.SaveChanges();
-
             return RedirectToAction("Index", "Customer");
         }
 
         [Route("customers/edit/{Id}")]
         public ActionResult Edit(int Id)
         {
+            ViewBag.pageTitle = "Edit Customer";
+
             var customers = _context.Customers.SingleOrDefault(c => c.Id == Id);
 
             if (customers == null)

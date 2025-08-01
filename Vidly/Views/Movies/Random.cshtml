@@ -7,11 +7,13 @@
 }
 
 <h2>Movies</h2>
+<a href="~/movies/new" class="btn btn-primary mb-3">+Add Movie</a>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Movies</th>
             <th>Genre</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +23,9 @@
                 <tr>
                     <td><a href="~/movies/details/@movie.Id">@movie.Name</a></td>
                     <td>@movie.Genre.Name</td>
+                    <td>
+                        <a href="~/movies/edit/@movie.Id">Edit</a>
+                    </td>
                 </tr>
             }
         }
